@@ -34,11 +34,11 @@ def save_data(df, filename):
 
 def main():
     # Step 1: Read Employee Data
-    df = read_employee_data('employees.csv')
+    df = read_employee_data('input/employees.csv')
     
     # Step 2: Clean Employee Data
     df_cleaned = clean_data(df)
-    save_data(df_cleaned, 'cleaned_employees.csv')
+    save_data(df_cleaned, 'output/cleaned_employees.csv')
     
     # Step 3: Fetch Customer Data
     api_url = "https://jsonplaceholder.typicode.com/users"
@@ -51,14 +51,14 @@ def main():
     df_cleaned = add_salary_after_tax(df_cleaned)
     
     # Step 6: Save Updated Data
-    save_data(df_cleaned, 'updated_employees.csv')
+    save_data(df_cleaned, 'output/updated_employees.csv')
     
     # Step 7: Save Customer-Linked Employees
     customer_linked_employees = df_cleaned[df_cleaned['Customer_Linked']]
-    save_data(customer_linked_employees, 'customer_linked_employees.csv')
+    save_data(customer_linked_employees, 'output/customer_linked_employees.csv')
     
     # Step 8: Convert to JSON
-    df_cleaned.to_json('employees_data.json', orient='records', indent=4)
+    df_cleaned.to_json('output/employees_data.json', orient='records', indent=4)
     print("ETL process completed successfully!")
 
 if __name__ == '__main__':
