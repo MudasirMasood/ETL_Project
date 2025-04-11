@@ -1,23 +1,5 @@
 [
     {
-        "ID":1,
-        "Name":"Alice",
-        "Age":30,
-        "Department":"Engineering",
-        "Salary":70000,
-        "Customer_Linked":false,
-        "Salary_After_Tax":63000.0
-    },
-    {
-        "ID":2,
-        "Name":"Bob",
-        "Age":25,
-        "Department":"Marketing",
-        "Salary":50000,
-        "Customer_Linked":false,
-        "Salary_After_Tax":45000.0
-    },
-    {
         "ID":3,
         "Name":"Charlie",
         "Age":35,
@@ -34,15 +16,6 @@
         "Salary":90000,
         "Customer_Linked":false,
         "Salary_After_Tax":81000.0
-    },
-    {
-        "ID":5,
-        "Name":"Eve",
-        "Age":28,
-        "Department":"Marketing",
-        "Salary":55000,
-        "Customer_Linked":false,
-        "Salary_After_Tax":49500.0
     },
     {
         "ID":6,
@@ -63,15 +36,6 @@
         "Salary_After_Tax":85500.0
     },
     {
-        "ID":8,
-        "Name":"Hank",
-        "Age":27,
-        "Department":"Marketing",
-        "Salary":48000,
-        "Customer_Linked":false,
-        "Salary_After_Tax":43200.0
-    },
-    {
         "ID":9,
         "Name":"Ivy",
         "Age":33,
@@ -79,14 +43,5 @@
         "Salary":62000,
         "Customer_Linked":false,
         "Salary_After_Tax":55800.0
-    },
-    {
-        "ID":10,
-        "Name":"Jack",
-        "Age":29,
-        "Department":"Engineering",
-        "Salary":72000,
-        "Customer_Linked":false,
-        "Salary_After_Tax":64800.0
     }
 ]
