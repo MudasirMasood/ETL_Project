@@ -4,6 +4,11 @@ SELECT
     name,
     age,
     department,
-    ROUND(salary, 2) AS salary
+    ROUND(AVG(salary), 2) AS average_salary
 FROM 
-    raw.stg_employees;
+    raw.stg_employees
+WHERE 
+    salary > 0  -- Clean data by excluding zero salaries
+GROUP BY 
+    id, name, age, department;
+GO
