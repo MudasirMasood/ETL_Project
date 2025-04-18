@@ -5,6 +5,7 @@
         "Age":35,
         "Department":"HR",
         "Salary":60000,
+        "company":"HR Solutions Ltd",
         "Customer_Linked":false,
         "Salary_After_Tax":54000.0
     },
@@ -14,6 +15,7 @@
         "Age":40,
         "Department":"Engineering",
         "Salary":90000,
+        "company":"Tech Company A",
         "Customer_Linked":false,
         "Salary_After_Tax":81000.0
     },
@@ -23,6 +25,7 @@
         "Age":45,
         "Department":"HR",
         "Salary":70000,
+        "company":"HR Solutions Ltd",
         "Customer_Linked":false,
         "Salary_After_Tax":63000.0
     },
@@ -32,6 +35,7 @@
         "Age":38,
         "Department":"Engineering",
         "Salary":95000,
+        "company":"Tech Company A",
         "Customer_Linked":false,
         "Salary_After_Tax":85500.0
     },
@@ -41,6 +45,7 @@
         "Age":33,
         "Department":"HR",
         "Salary":62000,
+        "company":"HR Solutions Ltd",
         "Customer_Linked":false,
         "Salary_After_Tax":55800.0
     }

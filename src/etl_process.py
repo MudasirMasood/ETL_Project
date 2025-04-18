@@ -43,8 +43,8 @@ def load_data_to_db(data, db_name):
     """Load the transformed data into a SQLite database."""
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    
-    # Create table if it doesn't exist
+
+    # Create employee table if it doesn't exist
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS employees (
             ID INTEGER PRIMARY KEY,
@@ -57,19 +57,59 @@ def load_data_to_db(data, db_name):
         )
     ''')
 
-    # Filter out rows with None values in critical columns
-    filtered_data = [
-        (d['ID'], d['Name'], d.get('Email', ''), d['Department'], d['Salary'], d['Salary_After_Tax'], d['Customer_Linked'])
-        for d in data if None not in (d.get('ID'), d.get('Name'), d.get('Department'), d.get('Salary'), d.get('Salary_After_Tax'))
-    ]
+    # Insert data into employees table
+    # Your existing insertion logic...
 
-    # Print filtered data for debugging
-    print("Filtered data for insertion:", filtered_data)
+    # Drop existing views if they exist
+    cursor.execute('DROP VIEW IF EXISTS transformed_orders')
+    cursor.execute('DROP TABLE IF EXISTS fact_orders_summary')
+    cursor.execute('DROP TABLE IF EXISTS dim_customers')
 
-    # Insert data using INSERT OR IGNORE to avoid UNIQUE constraint errors
-    cursor.executemany('INSERT OR IGNORE INTO employees (ID, Name, Email, Department, Salary, Salary_After_Tax, Customer_Linked) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                       filtered_data)
-    
+    # Create new views and tables
+    cursor.execute('''
+    CREATE VIEW transformed_orders AS
+    SELECT 
+        o.order_id,
+        c.first_name || ' ' || c.last_name AS customer_name,
+        o.order_date,
+        SUM(oi.quantity) AS total_items,
+        ROUND(SUM(oi.quantity * oi.unit_price), 2) AS total_amount,
+        o.status
+    FROM 
+        stg_orders o
+    JOIN 
+        stg_order_items oi ON o.order_id = oi.order_id
+    JOIN 
+        stg_customers c ON o.customer_id = c.customer_id
+    WHERE 
+        o.status = 'delivered'
+    GROUP BY 
+        o.order_id, c.first_name, c.last_name, o.order_date, o.status;
+    ''')
+
+    # Create final tables
+    cursor.execute('''
+    CREATE TABLE fact_orders_summary AS
+    SELECT 
+        customer_name,
+        COUNT(order_id) AS total_orders,
+        SUM(total_amount) AS total_revenue
+    FROM 
+        transformed_orders
+    GROUP BY 
+        customer_name;
+    ''')
+
+    cursor.execute('''
+    CREATE TABLE dim_customers AS
+    SELECT 
+        customer_id,
+        first_name || ' ' || last_name AS customer_name,
+        signup_date
+    FROM 
+        stg_customers;
+    ''')
+
     conn.commit()
     conn.close()
 
@@ -110,7 +150,7 @@ def main():
         
         # Step 10: Load Data to SQLite
         load_data_to_db(df_filtered.to_dict(orient='records'), 'employees.db')
-        
+
         print("ETL process completed successfully!")
 
     except Exception as e:

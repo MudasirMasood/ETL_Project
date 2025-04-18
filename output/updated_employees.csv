@@ -1,6 +1,6 @@
-ID,Name,Age,Department,Salary,Customer_Linked,Salary_After_Tax
-3,Charlie,35,HR,60000,False,54000.0
-4,David,40,Engineering,90000,False,81000.0
-6,Frank,45,HR,70000,False,63000.0
-7,Grace,38,Engineering,95000,False,85500.0
-9,Ivy,33,HR,62000,False,55800.0
+ID,Name,Age,Department,Salary,company,Customer_Linked,Salary_After_Tax
+3,Charlie,35,HR,60000,HR Solutions Ltd,False,54000.0
+4,David,40,Engineering,90000,Tech Company A,False,81000.0
+6,Frank,45,HR,70000,HR Solutions Ltd,False,63000.0
+7,Grace,38,Engineering,95000,Tech Company A,False,85500.0
+9,Ivy,33,HR,62000,HR Solutions Ltd,False,55800.0
